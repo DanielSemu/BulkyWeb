@@ -31,6 +31,7 @@ namespace BulkyWeb.Controllers
             if (ModelState.IsValid) { 
                 _context.Categories.Add(obj);
                 _context.SaveChanges();
+                TempData["success"] = "Category Created Succesfully";
                 return RedirectToAction("Index", "Category");
             }
             return View();
@@ -63,6 +64,7 @@ namespace BulkyWeb.Controllers
             {
                 _context.Categories.Update(obj);
                 _context.SaveChanges();
+                TempData["warning"] = "Category Updated Succesfully";
                 return RedirectToAction("Index", "Category");
             }
             return View();
@@ -75,25 +77,22 @@ namespace BulkyWeb.Controllers
                 return NotFound();
             }
             Category? category = _context.Categories.Find(id);
-            Category? category1 = _context.Categories.FirstOrDefault(c => c.Id == id);
-            Category? category2 = _context.Categories.Where(c => c.Id == id).FirstOrDefault();
+            //Category? category1 = _context.Categories.FirstOrDefault(c => c.Id == id);
+            //Category? category2 = _context.Categories.Where(c => c.Id == id).FirstOrDefault();
             if (category == null)
             {
                 return NotFound();
             }
-            //var ed = 2;
-            //var category = _context.Categories.FirstOrDefault(c => c.Id == ed);
             return View(category);
         }
         [HttpPost,ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
             Category? obj = _context.Categories.FirstOrDefault(c => c.Id == id);
-          
-           
                 _context.Categories.Remove(obj);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Category");
+            TempData["error"] = "Category Deleted Succesfully";
+            return RedirectToAction("Index", "Category");
  
 
         }
