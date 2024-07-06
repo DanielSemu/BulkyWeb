@@ -1,7 +1,8 @@
-﻿using BulkyWeb.Models;
+﻿ 
+using Bulky.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyWeb.Data
+namespace Bulky.DataAccess.Data
 {
     public class ApplicationDbContext:DbContext
     {
@@ -9,6 +10,8 @@ namespace BulkyWeb.Data
         { }
         public DbSet<TestTable> Tests { get; set; }
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Product> Products { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
